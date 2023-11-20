@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Scenario2Test"
+           tests="1"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="11.684">
+  <properties />
+  
+  
+            <testcase name="testScenario2" time="11.684" classname="tests.Scenario2Test" />
+      
+</testsuite>

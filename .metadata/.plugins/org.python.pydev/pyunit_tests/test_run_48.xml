@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pydev-testrun version="1.0"?><pydev-testsuite>
+    <summary errors="0" failures="0" finished="true" name="Test Run: 48" tests="2" total_time="Finished in: 19.62 secs."/>
+    <test location="C:\Users\Aravi\Automation\FinalProject\CapstonePy\test_my_script.py" status="ok" test="test_scenario_1" time="3.62">
+        <stdout/>
+        <stderr/>
+    </test>
+    <test location="C:\Users\Aravi\Automation\FinalProject\CapstonePy\test_my_script.py" status="ok" test="test_scenario_2" time="3.34">
+        <stdout/>
+        <stderr/>
+    </test>
+    <launch mode="run">
+        <launch_memento><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration local="true" path="CapstonePy test_my_script.py"/>
+]]></launch_memento>
+    </launch>
+</pydev-testsuite>

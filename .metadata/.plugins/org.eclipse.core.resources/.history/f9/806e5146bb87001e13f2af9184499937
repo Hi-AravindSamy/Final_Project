@@ -1,0 +1,70 @@
+import pytest
+import time
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
+
+
+
+@pytest.fixture(scope="session")
+def browser():
+    driver = webdriver.Chrome()
+    driver.maximize_window()
+    yield driver
+    driver.quit()
+
+def test_scenario_1(browser):
+    url = "https://automationpanda.com/2021/12/29/want-to-practice-test-automation-try-these-demo-sites/"
+    browser.get(url)
+
+    assert browser.title == "Want to practice test automation? Try these demo sites! | Automation Panda"
+
+    speaking_link = browser.find_element(By.XPATH, "//a[text()='Speaking']")
+    speaking_link.click()
+
+    assert browser.title == "Speaking | Automation Panda"
+
+    keynote_addresses_element = browser.find_element(By.XPATH, "//h2[text()='Keynote Addresses']")
+    assert keynote_addresses_element.is_displayed()
+
+    conference_talks_element = browser.find_element(By.XPATH, "//h2[text()='Conference Talks']")
+    assert conference_talks_element.is_displayed()
+
+def test_scenario_2(browser):
+    pop_up = browser.driver.find_element(By.XPATH, "//div[contains(@class,'wFoIb row')]")
+    popup_close = browser.driver.find_element(By.CSS_SELECTOR, "button._2KpZ6l._2doB4z")
+    time.sleep(4)
+    if pop_up.is_displayed():
+        popup_close.click()
+        assert True
+    else:
+        print("pop up is not available")
+        assert False
+    time.sleep(50)
+    login_button = browser.driver.find_element(By.XPATH, "//a[@class='_1_3w1N']")
+    if login_button.is_displayed() and login_button.is_enabled():
+        print("login button is displayed and enabled")
+        login_button.click()
+        assert True
+    else:
+        print("login button is not enabled or displayed")
+        assert False
+    mobile_number = browser.driver.find_element(By.XPATH, "//input[contains(@class,'VJZDxU')]")
+    mobile_number.send_keys("9876543210")
+    time.sleep(3)
+    request_otp_button = browser.driver.find_element(By.XPATH, "//button[text()='Request OTP']")
+    if request_otp_button.is_displayed() and request_otp_button.is_enabled():
+        print("request OTP button is displayed and enabled")
+        assert True
+        request_otp_button.click()
+    else:
+        print("request OTP button is displayed or enabled")
+        assert False
+    time.sleep(10)
+    message = browser.driver.find_element(By.XPATH, "//div[contains(text(), 'Please enter the OTP sent to')]")
+    if message.is_displayed():
+        assert True
+    else:
+        assert False

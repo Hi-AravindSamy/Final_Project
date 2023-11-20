@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pydev-testrun version="1.0"?><pydev-testsuite>
+    <summary errors="2" failures="0" finished="true" name="Test Run: 10" tests="2" total_time="Finished in: 0.17 secs."/>
+    <test location="C:\Users\Aravi\Automation\FinalProject\CapstonePy\test_my_script.py" status="error" test="test_scenario_1" time="0.00">
+        <stdout/>
+        <stderr><![CDATA[file C:\Users\Aravi\Automation\FinalProject\CapstonePy\test_my_script.py, line 14
+  def test_scenario_1(driver):
+E       fixture 'driver' not found
+>       available fixtures: browser, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+C:\Users\Aravi\Automation\FinalProject\CapstonePy\test_my_script.py:14]]></stderr>
+    </test>
+    <test location="C:\Users\Aravi\Automation\FinalProject\CapstonePy\test_my_script.py" status="error" test="test_scenario_2" time="0.00">
+        <stdout/>
+        <stderr><![CDATA[file C:\Users\Aravi\Automation\FinalProject\CapstonePy\test_my_script.py, line 37
+  def test_scenario_2(driver):
+E       fixture 'driver' not found
+>       available fixtures: browser, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+C:\Users\Aravi\Automation\FinalProject\CapstonePy\test_my_script.py:37]]></stderr>
+    </test>
+    <launch mode="run">
+        <launch_memento><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration local="true" path="CapstonePy test_my_script.py"/>
+]]></launch_memento>
+    </launch>
+</pydev-testsuite>

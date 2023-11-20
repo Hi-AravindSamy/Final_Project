@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pydev-testrun version="1.0"?><pydev-testsuite>
+    <summary errors="0" failures="1" finished="true" name="Test Run: 39" tests="2" total_time="Finished in: 15.07 secs."/>
+    <test location="C:\Users\Aravi\Automation\FinalProject\CapstonePy\test_my_script.py" status="ok" test="test_scenario_1" time="5.31">
+        <stdout/>
+        <stderr/>
+    </test>
+    <test location="C:\Users\Aravi\Automation\FinalProject\CapstonePy\test_my_script.py" status="fail" test="test_scenario_2" time="2.82">
+        <stdout/>
+        <stderr><![CDATA[browser = <selenium.webdriver.chrome.webdriver.WebDriver (session="7a59181c2f66fab109808bf0909155bd")>
+
+    def test_scenario_2(browser):
+        url = "https://www.flipkart.com/"
+        browser.get(url)
+    
+    
+        wait = WebDriverWait(browser, 10)
+    
+        exit_popup_close_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//span[contains(text(),'&#10005;')]")))
+        exit_popup_close_button.click()
+    
+        wait = WebDriverWait(browser, 10)
+        # Click on the Login button
+>       login_button = browser.find_element((By.XPATH, "//a[@class='_1krdK5 vbCXhM']"))
+
+test_my_script.py:46: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\selenium\webdriver\remote\webdriver.py:741: in find_element
+    return self.execute(Command.FIND_ELEMENT, {"using": by, "value": value})["value"]
+..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\selenium\webdriver\remote\webdriver.py:347: in execute
+    self.error_handler.check_response(response)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <selenium.webdriver.remote.errorhandler.ErrorHandler object at 0x000001A6E38F5190>
+response = {'status': 400, 'value': '{"value":{"error":"invalid argument","message":"invalid argument: \'using\' must be a string...07FF690D3D3A3]\\n\\tBaseThreadInitThunk [0x00007FFB9170257D+29]\\n\\tRtlUserThreadStart [0x00007FFB9240AA58+40]\\n"}}'}
+
+    def check_response(self, response: Dict[str, Any]) -> None:
+        """Checks that a JSON response from the WebDriver does not have an
+        error.
+    
+        :Args:
+         - response - The JSON response from the WebDriver server as a dictionary
+           object.
+    
+        :Raises: If the response contains an error message.
+        """
+        status = response.get("status", None)
+        if not status or status == ErrorCode.SUCCESS:
+            return
+        value = None
+        message = response.get("message", "")
+        screen: str = response.get("screen", "")
+        stacktrace = None
+        if isinstance(status, int):
+            value_json = response.get("value", None)
+            if value_json and isinstance(value_json, str):
+                import json
+    
+                try:
+                    value = json.loads(value_json)
+                    if len(value) == 1:
+                        value = value["value"]
+                    status = value.get("error", None)
+                    if not status:
+                        status = value.get("status", ErrorCode.UNKNOWN_ERROR)
+                        message = value.get("value") or value.get("message")
+                        if not isinstance(message, str):
+                            value = message
+                            message = message.get("message")
+                    else:
+                        message = value.get("message", None)
+                except ValueError:
+                    pass
+    
+        exception_class: Type[WebDriverException]
+        e = ErrorCode()
+        error_codes = [item for item in dir(e) if not item.startswith("__")]
+        for error_code in error_codes:
+            error_info = getattr(ErrorCode, error_code)
+            if isinstance(error_info, list) and status in error_info:
+                exception_class = getattr(ExceptionMapping, error_code, WebDriverException)
+                break
+        else:
+            exception_class = WebDriverException
+    
+        if not value:
+            value = response["value"]
+        if isinstance(value, str):
+            raise exception_class(value)
+        if message == "" and "message" in value:
+            message = value["message"]
+    
+        screen = None  # type: ignore[assignment]
+        if "screen" in value:
+            screen = value["screen"]
+    
+        stacktrace = None
+        st_value = value.get("stackTrace") or value.get("stacktrace")
+        if st_value:
+            if isinstance(st_value, str):
+                stacktrace = st_value.split("\n")
+            else:
+                stacktrace = []
+                try:
+                    for frame in st_value:
+                        line = frame.get("lineNumber", "")
+                        file = frame.get("fileName", "<anonymous>")
+                        if line:
+                            file = f"{file}:{line}"
+                        meth = frame.get("methodName", "<anonymous>")
+                        if "className" in frame:
+                            meth = f"{frame['className']}.{meth}"
+                        msg = "    at %s (%s)"
+                        msg = msg % (meth, file)
+                        stacktrace.append(msg)
+                except TypeError:
+                    pass
+        if exception_class == UnexpectedAlertPresentException:
+            alert_text = None
+            if "data" in value:
+                alert_text = value["data"].get("text")
+            elif "alert" in value:
+                alert_text = value["alert"].get("text")
+            raise exception_class(message, screen, stacktrace, alert_text)  # type: ignore[call-arg]  # mypy is not smart enough here
+>       raise exception_class(message, screen, stacktrace)
+E       selenium.common.exceptions.InvalidArgumentException: Message: invalid argument: 'using' must be a string
+E         (Session info: chrome=119.0.6045.160)
+E       Stacktrace:
+E       	GetHandleVerifier [0x00007FF690DD82B2+55298]
+E       	(No symbol) [0x00007FF690D45E02]
+E       	(No symbol) [0x00007FF690C005AB]
+E       	(No symbol) [0x00007FF690C4165F]
+E       	(No symbol) [0x00007FF690C418DC]
+E       	(No symbol) [0x00007FF690C7CBC7]
+E       	(No symbol) [0x00007FF690C620EF]
+E       	(No symbol) [0x00007FF690C7AAA4]
+E       	(No symbol) [0x00007FF690C61E83]
+E       	(No symbol) [0x00007FF690C3670A]
+E       	(No symbol) [0x00007FF690C37964]
+E       	GetHandleVerifier [0x00007FF691150AAB+3694587]
+E       	GetHandleVerifier [0x00007FF6911A728E+4048862]
+E       	GetHandleVerifier [0x00007FF69119F173+4015811]
+E       	GetHandleVerifier [0x00007FF690E747D6+695590]
+E       	(No symbol) [0x00007FF690D50CE8]
+E       	(No symbol) [0x00007FF690D4CF34]
+E       	(No symbol) [0x00007FF690D4D062]
+E       	(No symbol) [0x00007FF690D3D3A3]
+E       	BaseThreadInitThunk [0x00007FFB9170257D+29]
+E       	RtlUserThreadStart [0x00007FFB9240AA58+40]
+
+..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\selenium\webdriver\remote\errorhandler.py:229: InvalidArgumentException]]></stderr>
+    </test>
+    <launch mode="run">
+        <launch_memento><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration local="true" path="CapstonePy test_my_script.py"/>
+]]></launch_memento>
+    </launch>
+</pydev-testsuite>
