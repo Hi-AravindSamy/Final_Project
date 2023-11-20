@@ -1,0 +1,72 @@
+import pytest
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from webdriver_manager.chrome import ChromeDriverManager
+
+@pytest.fixture
+def driver():
+    # Setup
+    options = webdriver.ChromeOptions()  # Create ChromeOptions object
+    # Add any additional options if needed
+    # options.add_argument('--headless')  # Example: run Chrome in headless mode
+    
+    # Specify the path to the ChromeDriver executable
+    chromedriver_path = "C:\\Users\\Aravi\\Downloads\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe"
+    
+    # Initialize the WebDriver with the options and explicit ChromeDriver path
+    driver = webdriver.Chrome(executable_path=chromedriver_path, options=options)
+
+    yield driver  # Return the driver object
+
+    # Teardown
+    driver.quit()
+
+
+# Scenario 1
+def test_scenario_1(driver):
+    # Launch the URL
+    driver.get("https://automationpanda.com/2021/12/29/want-to-practice-test-automation-try-these-demo-sites/")
+
+    # Verify the title of the page
+    assert "Want to Practice Test Automation? Try These Demo Sites." in driver.title
+
+    # Click on Speaking and verify the title of the page
+    speaking_link = driver.find_element(By.LINK_TEXT, "Speaking")
+    speaking_link.click()
+    assert "Speaking Engagements – Automation Panda" in driver.title
+
+    # Verify Keynote Addresses
+    keynote_element = driver.find_element(By.LINK_TEXT, "Keynote Addresses")
+    assert keynote_element.is_displayed()
+    assert "Keynote Addresses" in keynote_element.text
+
+    # Verify Conference Talks
+    conference_element = driver.find_element(By.LINK_TEXT, "Conference Talks")
+    assert conference_element.is_displayed()
+    assert "Conference Talks" in conference_element.text
+
+# Scenario 2
+def test_scenario_2(driver):
+    # Launch the URL
+    driver.get("https://www.flipkart.com/")
+
+    # Verify the Login button is present
+    login_button = driver.find_element(By.XPATH, "//a[text()='Login']")
+    assert login_button.is_displayed()
+
+    # Click on Login button
+    login_button.click()
+
+    # Enter Phone Number and click on Request OTP button
+    phone_input = driver.find_element(By.XPATH, "//input[@class='_2IX_2- VJZDxU']")
+    phone_input.send_keys("your_phone_number")  # Replace with your actual phone number
+
+    request_otp_button = driver.find_element(By.XPATH, "//button[@class='_2KpZ6l _2HKlqd _3AWRsL']")
+    request_otp_button.click()
+
+    # Verify the success message in the pop-up
+    popup_message = driver.find_element(By.XPATH, f"//div[text()='Please enter the OTP sent to \"your_phone_number\"']")
+    assert popup_message.is_displayed()
+
+if __name__ == "__main__":
+    pytest.main()

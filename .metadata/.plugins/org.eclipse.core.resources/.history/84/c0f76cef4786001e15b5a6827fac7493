@@ -1,0 +1,50 @@
+package tests;
+
+import java.util.NoSuchElementException;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotInteractableException;
+import org.openqa.selenium.WebElement;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
+import pages.HomePage;
+import pages.SearchResultPage;
+
+public class Scenario2Test extends BaseTest {
+
+	@Test
+	public void testScenario2() {
+		driver.get("https://www.flipkart.com/");
+
+		closeLoginPopup();
+
+		HomePage homePage = new HomePage(driver);
+
+		Assert.assertTrue(driver.getPageSource().contains("Flipkart"));
+
+		homePage.search("iphone 14");
+
+		SearchResultPage searchResultPage = new SearchResultPage(driver);
+		int itemCount = searchResultPage.getItemCount();
+		System.out.println(itemCount);
+		Assert.assertTrue(itemCount > 0);
+
+		searchResultPage.clickFirstItem();
+
+		Assert.assertEquals(driver.getTitle(),
+				"Iphone 14- Buy Products Online at Best Price in India - All Categories | Flipkart.com");
+	}
+
+	private void closeLoginPopup() {
+		try {
+
+			WebElement closeButton = driver.findElement(By.xpath("//span[contains(text(),'✕')]"));
+			if (closeButton.isDisplayed()) {
+				closeButton.click();
+			}
+		} catch (NoSuchElementException | ElementNotInteractableException e) {
+
+		}
+	}
+}

@@ -1,0 +1,55 @@
+package tests;
+
+import java.util.NoSuchElementException;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotInteractableException;
+import org.openqa.selenium.WebElement;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
+import pages.HomePage;
+import pages.SearchResultPage;
+
+public class Scenario2Test extends BaseTest {
+
+    @Test
+    public void testScenario2() {
+        driver.get("https://www.flipkart.com/");
+
+        // Close the login popup if it appears
+        closeLoginPopup();
+
+        HomePage homePage = new HomePage(driver);
+        // Assuming Flipkart link is present on the left side of the top
+        Assert.assertTrue(driver.getPageSource().contains("Flipkart"));
+
+        // Searching for "iphone 14"
+        homePage.search("iphone 14");
+
+        SearchResultPage searchResultPage = new SearchResultPage(driver);
+        int itemCount = searchResultPage.getItemCount();
+        Assert.assertTrue(itemCount > 0);
+
+        // Clicking on the first displayed item
+        searchResultPage.clickFirstItem();
+
+        // Verifying the navigation and title of the page
+        Assert.assertEquals(driver.getTitle(), "Online Shopping Site for Mobiles, Electronics, Furniture, Grocery, Lifestyle, Books & More. Best Offers!");
+    }
+
+    private void closeLoginPopup() {
+        try {
+            // Identify and close the login popup elements
+            // For example, if there is a close button:
+            WebElement closeButton = driver.findElement(By.xpath("//span[contains(text(),'✕')]"));
+            if (closeButton.isDisplayed()) {
+                closeButton.click();
+            }
+        } catch (NoSuchElementException | ElementNotInteractableException e) {
+            // Handle the exception if the login popup elements are not found or not interactable
+            // This is just an example, adapt it based on your actual login popup structure
+        }
+    }
+}
+

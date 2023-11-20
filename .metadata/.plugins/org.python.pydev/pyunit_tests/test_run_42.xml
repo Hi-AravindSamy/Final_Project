@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pydev-testrun version="1.0"?><pydev-testsuite>
+    <summary errors="0" failures="1" finished="true" name="Test Run: 42" tests="2" total_time="Finished in: 25.35 secs."/>
+    <test location="C:\Users\Aravi\Automation\FinalProject\CapstonePy\test_my_script.py" status="ok" test="test_scenario_1" time="4.94">
+        <stdout/>
+        <stderr/>
+    </test>
+    <test location="C:\Users\Aravi\Automation\FinalProject\CapstonePy\test_my_script.py" status="fail" test="test_scenario_2" time="13.02">
+        <stdout/>
+        <stderr><![CDATA[browser = <selenium.webdriver.chrome.webdriver.WebDriver (session="9c6114d5edaa871611406c03fbb6284c")>
+
+    def test_scenario_2(browser):
+        url = "https://www.flipkart.com/"
+        browser.get(url)
+    
+    
+        wait = WebDriverWait(browser, 10)
+    
+        # exit_popup_close_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//span[contains(text(),'&#10005;')]")))
+        # exit_popup_close_button.click()
+        #
+        # wait = WebDriverWait(browser, 10)
+        # # Click on the Login button
+        # login_button = browser.find_element((By.XPATH, "//a[@class='_1krdK5 vbCXhM']"))
+        #
+        #
+        #
+        # ActionChains(browser).move_to_element(login_button).click().perform()
+    
+        # Enter the phone number
+        phone_number_input = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_22Dgdy _29BEA8']//input")))
+        phone_number_input.send_keys("8989708990")
+    
+        # Click on the Request OTP button
+        request_otp_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@class='_1wGnMD rX1XT4 _2nD2xJ']")))
+        request_otp_button.click()
+    
+        # Verify the OTP message
+>       otp_message_element = wait.until(EC.visibility_of_element_located((By.XPATH, "//div[contains(text(), 'Please enter the OTP sent to')]")))
+
+test_my_script.py:61: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <selenium.webdriver.support.wait.WebDriverWait (session="9c6114d5edaa871611406c03fbb6284c")>
+method = <function visibility_of_element_located.<locals>._predicate at 0x000001AB09D1AE80>
+message = ''
+
+    def until(self, method: Callable[[WebDriver], Union[Literal[False], T]], message: str = "") -> T:
+        """Calls the method provided with the driver as an argument until the \
+        return value does not evaluate to ``False``.
+    
+        :param method: callable(WebDriver)
+        :param message: optional message for :exc:`TimeoutException`
+        :returns: the result of the last call to `method`
+        :raises: :exc:`selenium.common.exceptions.TimeoutException` if timeout occurs
+        """
+        screen = None
+        stacktrace = None
+    
+        end_time = time.monotonic() + self._timeout
+        while True:
+            try:
+                value = method(self._driver)
+                if value:
+                    return value
+            except self._ignored_exceptions as exc:
+                screen = getattr(exc, "screen", None)
+                stacktrace = getattr(exc, "stacktrace", None)
+            time.sleep(self._poll)
+            if time.monotonic() > end_time:
+                break
+>       raise TimeoutException(message, screen, stacktrace)
+E       selenium.common.exceptions.TimeoutException: Message: 
+E       Stacktrace:
+E       	GetHandleVerifier [0x00007FF6108782B2+55298]
+E       	(No symbol) [0x00007FF6107E5E02]
+E       	(No symbol) [0x00007FF6106A05AB]
+E       	(No symbol) [0x00007FF6106E175C]
+E       	(No symbol) [0x00007FF6106E18DC]
+E       	(No symbol) [0x00007FF61071CBC7]
+E       	(No symbol) [0x00007FF6107020EF]
+E       	(No symbol) [0x00007FF61071AAA4]
+E       	(No symbol) [0x00007FF610701E83]
+E       	(No symbol) [0x00007FF6106D670A]
+E       	(No symbol) [0x00007FF6106D7964]
+E       	GetHandleVerifier [0x00007FF610BF0AAB+3694587]
+E       	GetHandleVerifier [0x00007FF610C4728E+4048862]
+E       	GetHandleVerifier [0x00007FF610C3F173+4015811]
+E       	GetHandleVerifier [0x00007FF6109147D6+695590]
+E       	(No symbol) [0x00007FF6107F0CE8]
+E       	(No symbol) [0x00007FF6107ECF34]
+E       	(No symbol) [0x00007FF6107ED062]
+E       	(No symbol) [0x00007FF6107DD3A3]
+E       	BaseThreadInitThunk [0x00007FFB9170257D+29]
+E       	RtlUserThreadStart [0x00007FFB9240AA58+40]
+
+..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\selenium\webdriver\support\wait.py:101: TimeoutException]]></stderr>
+    </test>
+    <launch mode="run">
+        <launch_memento><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration local="true" path="CapstonePy test_my_script.py"/>
+]]></launch_memento>
+    </launch>
+</pydev-testsuite>

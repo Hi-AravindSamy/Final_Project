@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pydev-testrun version="1.0"?><pydev-testsuite>
+    <summary errors="0" failures="1" finished="true" name="Test Run: 28" tests="2" total_time="Finished in: 10.63 secs."/>
+    <test location="C:\Users\Aravi\Automation\FinalProject\CapstonePy\test_my_script.py" status="ok" test="test_scenario_1" time="3.71">
+        <stdout/>
+        <stderr/>
+    </test>
+    <test location="C:\Users\Aravi\Automation\FinalProject\CapstonePy\test_my_script.py" status="fail" test="test_scenario_2" time="0.00">
+        <stdout/>
+        <stderr><![CDATA[browser = <selenium.webdriver.chrome.webdriver.WebDriver (session="19a2e3f24a1e7077a7353cc33793001e")>
+
+    def test_scenario_2(browser):
+>       pop_up = browser.driver.find_element(By.XPATH, "//div[contains(@class,'wFoIb row')]")
+E       AttributeError: 'WebDriver' object has no attribute 'driver'
+
+test_my_script.py:36: AttributeError]]></stderr>
+    </test>
+    <launch mode="run">
+        <launch_memento><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration local="true" path="CapstonePy test_my_script.py"/>
+]]></launch_memento>
+    </launch>
+</pydev-testsuite>

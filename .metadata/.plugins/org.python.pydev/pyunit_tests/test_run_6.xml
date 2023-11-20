@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pydev-testrun version="1.0"?><pydev-testsuite>
+    <summary errors="2" failures="0" finished="true" name="Test Run: 6" tests="2" total_time="Finished in: 9.56 secs."/>
+    <test location="C:\Users\Aravi\Automation\FinalProject\CapstonePy\test_my_script.py" status="error" test="test_scenario_1" time="5.08">
+        <stdout/>
+        <stderr><![CDATA[@pytest.fixture
+    def driver():
+        # Setup
+        options = webdriver.ChromeOptions()  # Create ChromeOptions object
+        # Add any additional options if needed
+        # options.add_argument('--headless')  # Example: run Chrome in headless mode
+    
+        # Use ChromeDriverManager to get the path of the ChromeDriver executable
+        driver_path = ChromeDriverManager().install()
+    
+        # Initialize the WebDriver with the options and driver path
+>       driver = webdriver.Chrome(executable_path="C:\\Users\\Aravi\\Downloads\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe", options=options)
+E       TypeError: WebDriver.__init__() got an unexpected keyword argument 'executable_path'
+
+test_my_script.py:17: TypeError]]></stderr>
+    </test>
+    <test location="C:\Users\Aravi\Automation\FinalProject\CapstonePy\test_my_script.py" status="error" test="test_scenario_2" time="4.01">
+        <stdout/>
+        <stderr><![CDATA[@pytest.fixture
+    def driver():
+        # Setup
+        options = webdriver.ChromeOptions()  # Create ChromeOptions object
+        # Add any additional options if needed
+        # options.add_argument('--headless')  # Example: run Chrome in headless mode
+    
+        # Use ChromeDriverManager to get the path of the ChromeDriver executable
+        driver_path = ChromeDriverManager().install()
+    
+        # Initialize the WebDriver with the options and driver path
+>       driver = webdriver.Chrome(executable_path="C:\\Users\\Aravi\\Downloads\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe", options=options)
+E       TypeError: WebDriver.__init__() got an unexpected keyword argument 'executable_path'
+
+test_my_script.py:17: TypeError]]></stderr>
+    </test>
+    <launch mode="run">
+        <launch_memento><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration local="true" path="CapstonePy test_my_script.py"/>
+]]></launch_memento>
+    </launch>
+</pydev-testsuite>
