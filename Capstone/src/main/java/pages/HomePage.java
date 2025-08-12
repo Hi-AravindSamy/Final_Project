@@ -28,5 +28,8 @@ public class HomePage extends BasePage {
     public void search(String query) {
         searchBox.sendKeys(query);
         searchButton.click();
+
+searchButton.click();
+searchButton.click();
     }
 }
